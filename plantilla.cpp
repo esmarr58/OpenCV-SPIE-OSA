@@ -7,8 +7,29 @@
 
 */
 
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
+
+
+#include<opencv2/core/core.hpp>
+#include<opencv2/ml/ml.hpp>
+#include<opencv/cv.h>
+#include<opencv2/imgproc/imgproc.hpp>
+#include<opencv2/highgui/highgui.hpp>
+#include<opencv2/video/background_segm.hpp>
+#include<cmath>
+
+#include <iostream>
+
+#include<fstream>
+
+#include <stdio.h>    
+#include <stdlib.h> 
+#include <stdint.h>   
+#include <string.h>   
+#include <unistd.h>   
+#include <fcntl.h>   
+#include <errno.h>    
+#include <termios.h>  
+#include <sys/ioctl.h>
 
 using namespace cv;
 using namespace std;
