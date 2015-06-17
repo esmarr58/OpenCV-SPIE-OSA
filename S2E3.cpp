@@ -49,90 +49,46 @@ static void SiRatonMueve(int evt, int x, int y, int flags, void* param){
 
 
 int main( void ){
-	//Variables para barras de desplazamiento
-	int ColorMin = 0, ColorMax = 255;
-	int SatMin = 0	, SatMax = 255;
-	int IntMin = 0	, IntMax = 255;
+//Mat nomb(y,x,size, color);
+Mat M1(400,400,CV_8UC3,Scalar(255, 255, 255));
+Mat M2(150,150,CV_8UC3,Scalar(0, 255, 0));
+Mat M3(100,150,CV_8UC3,Scalar(0, 0, 255));
+Mat imagen;
+Mat imagen_peq;
 
-	//Declarar una matriz
-	Mat imagen;
-	Mat imagen2; 
-	Mat imagen3;
 
-	//Declaro el objeto camara
-  VideoCapture camara(0); 
+//Rect Nom(Point(x,y), Size(x,y));
+Rect R1(Point(25,30),  Size(150,100));   
+Rect R2(Point(25,160), Size(150,100));
+Rect R3(Point(25,290), Size(150,100));
+Rect R4(Point(200,30), Size(150,150));
+Rect R5(Point(200,210),Size(150,150));
 
-	//Crear una ventana
-	namedWindow("V4",1);
+//origen.copyTo(destino(roi));
+M2.copyTo(M1(R4));
+M2.copyTo(M1(R5));
+M3.copyTo(M1(R1));
+M3.copyTo(M1(R2));
+M3.copyTo(M1(R3));
 
-	//Crear una barra
-	createTrackbar(	"ColorMinimo", 
-									"V4",
-									&ColorMin, 
-									255);
+VideoCapture camara(0);
+if(!camara.isOpened()) return 0;
 
-	createTrackbar(	"ColorMaximo", 
-									"V4",
-									&ColorMax, 
-									255);
-
-	createTrackbar(	"SaturacionMinimo", 
-									"V4",
-									&SatMin, 
-									255);
-
-	createTrackbar(	"SaturacionMaximo", 
-									"V4",
-									&SatMax, 
-									255);
-
-	createTrackbar(	"IntensidadMin", 
-									"V4",
-									&IntMin, 
-									255);
-
-	createTrackbar(	"IntensidadMax", 
-									"V4",
-									&IntMax, 
-									255);
 
 	for(;;){
-
-		//Guardar en una matriz la imagen de cam
 		camara >> imagen;
-		
-		GaussianBlur(		imagen, 
-										imagen2, 
-										Size(5, 5), 50, 50);
-cvtColor(imagen2, imagen2, CV_BGR2HSV, 0);	
-//	cvtColor(imagen2, imagen2, CV_BGR2GRAY, 0);
 
+		resize(		imagen, 
+							imagen_peq, 
+							Size(150,150), 
+							0,0,
+							INTER_LINEAR);
 
+		imagen_peq.copyTo(M1(R4));
 
-	
-		inRange(		imagen2,
-								Scalar(ColorMin,SatMin,IntMin),
-								Scalar(ColorMax,SatMax,IntMax),
-								imagen3);
-
-
-	
-		//Funcion para imagen guardada en matriz
-		//imshow(A,B); 
-		// A = "nombre de la ventana"
-		// B = nombre_de_la_matriz
-		
-		imshow( "V1"    , imagen   );
-		imshow( "V2" 		, imagen2);
-		imshow( "V3"		, imagen3);
-
-		//Esperar a presionar cualquier tecla	
-		// para terminar el programa
+		imshow("V1", M1);
 		if(waitKey(30)>0) break;
 	}
-	
-
-
 return(0);
 }
 
@@ -146,7 +102,8 @@ return(0);
     cvtColor(video, video, CV_BGR2HSV, 0);	
 		inRange(video,
 		Scalar(0,0,50),
-		Scalar(70,150,200),oediv);
+		Scalar(70,150,200),
+		oediv);
     NOmbre_Matriz_Guardar_Imagen = imread("imagen1.png");
     
     imwrite("HOla.jpg", video);
@@ -162,4 +119,10 @@ return(0);
     cvSetMouseCallback("ControlCasa-V0.111",SiRatonMueve, &temp );
     
     temporal.copyTo(plantilla(R4));
+
+ Rect R1(Point(25,30),  Size(150,100));
+    Rect R2(Point(25,160), Size(150,100));
+    Rect R3(Point(25,290), Size(150,100));
+    Rect R4(Point(200,30), Size(150,150));
+    Rect R5(Point(200,210),Size(150,150));
 */
