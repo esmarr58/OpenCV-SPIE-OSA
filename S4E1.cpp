@@ -52,8 +52,8 @@ static void SiRatonMueve(int evt, int x, int y, int flags, void* param){
 				cout << "X: " << x << endl;
 				cout << "Y: " << y << endl;
 
-				if(x>25 && x<175 && y>30 && y<130){
-					boton1 =  true;
+				if(x>10 && x<400 && y>10 && y<45){
+					boton1 = !boton1;
 				}
 			else if(x>25 && x<175 && y>160 && y<260){
 
@@ -76,12 +76,13 @@ int main( void ){
 //Variables
 //Mat nomb(y,x,size, color);
 Mat M1(35,390,	CV_8UC3,Scalar(0, 255, 255));
+Mat M1a(35,390,	CV_8UC3,Scalar(0, 255, 0));
 Mat M2(60,180,	CV_8UC3,Scalar(0, 255, 0));
 Mat M3(150,550,	CV_8UC3,Scalar(0, 0, 255));
 Mat M4(150,150, CV_8UC3,Scalar(0,0,255));
 Mat M5(330,730, CV_8UC3,Scalar(255,255,255));
-Mat M6(150,150, CV_8UC3,Scalar(0,0,255));
-
+Mat M6(150,150, CV_8UC3,Scalar(0,255,255));
+Mat img, img2;
 
 Rect R1(Point(10,10),Size(390,35));
 Rect R2(Point(10,55),Size(390,35));
@@ -103,33 +104,44 @@ M4.copyTo(M5(R8));
 
 
 	putText(		M5,
-							"Ssdfasfd",
+							"Ruben Estrada Marmolejo",
 							Point2f(10,200),
 							FONT_HERSHEY_PLAIN,
 							1,
 							Scalar(255,255,255),
 							1);
+	
+		
+	VideoCapture camara(1);
+	if(!camara.isOpened()) return 0;
 
-		imshow("V1", M5);
+	namedWindow("V1",1);
+		int temp=0;
+	 cvSetMouseCallback(	"V1",
+												SiRatonMueve, 
+												&temp );
 
 	for(;;){
-		
+			camara >> img;
+			resize(		img, 		
+								img2, 
+								Size(150,150),
+								 0,0,INTER_LINEAR);
+			if(boton1) { img2.copyTo(M5(R6)); 
+			M1a.copyTo(M5(R1));
+			}
+			else { M4.copyTo(M5(R6));
+    			M1.copyTo(M5(R1));
+
+			}
+			imshow("V1", M5);
+
+	
 		
 
-	//Retardo un segundo
-		std::this_thread::sleep_until(
-        std::chrono::system_clock::now() + std::chrono::seconds(1));
-		
 	
 
-		if(!bandera){
-		M6.copyTo(M5(R8));
-		bandera=true;
-		}
-		else{
-		M4.copyTo(M5(R8));
-		bandera=false;
-		}
+		
 		if(waitKey(30)>0) break;
 	}
 return(0);
