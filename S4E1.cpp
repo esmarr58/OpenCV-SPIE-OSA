@@ -80,7 +80,7 @@ Mat M2(60,180,	CV_8UC3,Scalar(0, 255, 0));
 Mat M3(150,550,	CV_8UC3,Scalar(0, 0, 255));
 Mat M4(150,150, CV_8UC3,Scalar(0,0,255));
 Mat M5(330,730, CV_8UC3,Scalar(255,255,255));
-Mat M6(150,150, CV_8UC3,Scalar(0,255,0));
+Mat M6(150,150, CV_8UC3,Scalar(0,0,255));
 
 
 Rect R1(Point(10,10),Size(390,35));
@@ -102,14 +102,26 @@ M4.copyTo(M5(R7));
 M4.copyTo(M5(R8));
 
 
+	putText(		M5,
+							"Ssdfasfd",
+							Point2f(10,200),
+							FONT_HERSHEY_PLAIN,
+							1,
+							Scalar(255,255,255),
+							1);
 
+		imshow("V1", M5);
 
 	for(;;){
 		
-		imshow("V1", M5);
+		
 
+	//Retardo un segundo
 		std::this_thread::sleep_until(
         std::chrono::system_clock::now() + std::chrono::seconds(1));
+		
+	
+
 		if(!bandera){
 		M6.copyTo(M5(R8));
 		bandera=true;
