@@ -60,7 +60,7 @@ static void SiRatonMueve(int evt, int x, int y, int flags, void* param){
 				if(x>10 && x<400 && y>10 && y<100){
 					if(boton1) cuenta++;					
 					boton1 = !boton1;
-					bandera=true;
+					
 					//cuenta++;
 				}
 		else if(x>10 && x<400 && y>110 && y<200){
@@ -69,7 +69,10 @@ static void SiRatonMueve(int evt, int x, int y, int flags, void* param){
 				//cuenta--;	
 				}
 	else if(x>10 && x<400 && y>310 && y<400){
-					boton3 = !boton3;
+				
+				bandera=true;
+				boton3 = !boton3;
+					
 				}
 	else if(x>10 && x<400 && y>410 && y<500){
 					cuenta = 0;
@@ -159,11 +162,11 @@ M3.copyTo(M1(R6));
 		if(boton3){
 				M3A.copyTo(M1(R4));
 				if(bandera){
-					
+					  M2.copyTo(M1(R7));
 						for(i=0; i<cuenta; i++){
-						circle(	M2,
-								Point((rand() % 380), 
-								( rand() % 580)),
+						circle(	M1,
+								Point((rand() % 380 + 410), 
+								( rand() % 580 + 10)),
 								5,
 								Scalar(0,255,0),
 								CV_FILLED,
@@ -172,7 +175,7 @@ M3.copyTo(M1(R6));
 
 
 						}
-						M2.copyTo(M1(R7));
+						
 						bandera=0;
 				
 
