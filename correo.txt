@@ -1,0 +1,28 @@
+Instalar:
+
+sudo apt-get install ssmtp
+
+Modificar el achivo
+
+sudo -e /etc/ssmtp/ssmtp.conf
+
+
+Editar el archive y agregar lo siguiente:
+
+
+Root=your_email@gmail.com
+Mailhub=smtp.gmail.com:465
+RewriteDomain=gmail.com
+AuthUser=your_gmail_username # me@gmail.com
+AuthPass=your_gmail_password
+FromLineOverride=Yes
+UseTLS=Yes
+
+sudo apt-get install heirloom-mailx
+
+Enviar correo
+mail < filename.ascii someone@somewhere.com -s "My File"
+
+
+sudo apt-get install mpack
+ mpack -s subject picture.png address@example.com
