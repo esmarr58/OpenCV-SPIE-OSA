@@ -42,6 +42,7 @@ bool boton3 = false;
 bool boton4 = false;
 bool boton5 = false;
 bool bandera = false;
+bool bandera2 = false;
 
 
 int cuenta=0;
@@ -80,6 +81,9 @@ static void SiRatonMueve(int evt, int x, int y, int flags, void* param){
 				}
 	else if(x>10 && x<400 && y>510 && y<600){
 					boton5 = !boton5;
+					bandera2=true;
+
+
 				}
 
 				break;
@@ -188,7 +192,17 @@ M3.copyTo(M1(R6));
 		if(boton4) M3A.copyTo(M1(R5));
 		else M3.copyTo(M1(R5));
 	
-		if(boton5) M3A.copyTo(M1(R6));
+		if(boton5) { M3A.copyTo(M1(R6));
+				if(bandera2){
+
+					imwrite("m1.jpg", M1);
+system("mpack -s subject m1.jpg ruben.estrada@hetpro.com.mx");
+			bandera2=false;
+					}
+
+
+
+		}
 		else	M3.copyTo(M1(R6));
 		
 
